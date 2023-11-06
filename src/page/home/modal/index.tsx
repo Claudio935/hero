@@ -17,9 +17,6 @@ const ModalCombat = ({ handleClose }: Props) => {
     const { selectHero } = state
 
 
-
-
-
     useEffect(() => {
         setWinner(null)
         const interval = setInterval(() => {
@@ -40,7 +37,7 @@ const ModalCombat = ({ handleClose }: Props) => {
                 return
             }
 
-        }, 10000);
+        }, 2000);
         return () => clearInterval(interval);
     }, [state?.selectHero])
 
