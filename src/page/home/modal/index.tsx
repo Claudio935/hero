@@ -2,21 +2,26 @@ import React, { useEffect, useState } from "react";
 import { Grid, Typography, Modal, Stack, Paper } from "@mui/material";
 import { useSelector } from "react-redux";
 import { Hero, StateHero } from "../../../types";
-import CardCombat from "./card";
+import { CardCombat, CardWinner } from "./card";
 
 
 type Props = {
     handleClose: () => void
 }
-
-
-
+type StateCompareFunction = "combat" | "durability" |
+    "intelligence" |
+    "power" |
+    "speed" |
+    "strength"
 const ModalCombat = ({ handleClose }: Props) => {
     const [winner, setWinner] = useState<Hero | null | "Empate">(null)
+
     const state = useSelector((state: StateHero) => state)
     const { selectHero } = state
 
-
+    const stateCompare = (key: StateCompareFunction) => {
+        return state.selectHero[0].powerstats[key] >= state.selectHero[1].powerstats[key]
+    }
     useEffect(() => {
         setWinner(null)
         const interval = setInterval(() => {
@@ -60,7 +65,14 @@ const ModalCombat = ({ handleClose }: Props) => {
                                     <Typography variant="h3" color="text.primary" textAlign={"center"}>Batalha</Typography>
                                 </Grid>
                                 <Grid item xs={12} md={5} >
-                                    <CardCombat dataHero={state.selectHero[0]} />
+                                    <CardCombat dataHero={state.selectHero[0]}
+                                        combatColor={stateCompare("combat")}
+                                        durabilityColor={stateCompare("durability")}
+                                        inteligenceColor={stateCompare("intelligence")}
+                                        powerColor={stateCompare("power")}
+                                        speedColor={stateCompare("speed")}
+                                        strengthColor={stateCompare("strength")}
+                                    />
 
                                 </Grid>
                                 <Grid item xs={12} md={2} display={"flex"} justifyContent={"center"} alignItems={"center"}>
@@ -70,7 +82,15 @@ const ModalCombat = ({ handleClose }: Props) => {
 
                                 </Grid>
                                 <Grid item xs={12} md={5}>
-                                    <CardCombat dataHero={state.selectHero[1]} />
+                                    <CardCombat dataHero={state.selectHero[1]}
+                                        combatColor={!stateCompare("combat")}
+                                        durabilityColor={!stateCompare("durability")}
+                                        inteligenceColor={!stateCompare("intelligence")}
+                                        powerColor={!stateCompare("power")}
+                                        speedColor={!stateCompare("speed")}
+                                        strengthColor={!stateCompare("strength")}
+                                    />
+
                                 </Grid>
                             </Grid>
                         </Paper>
@@ -83,55 +103,10 @@ const ModalCombat = ({ handleClose }: Props) => {
             <Modal
                 open={state.quantifySelectHero === 2}
                 onClose={handleClose}
-
             >
                 <>
                     {state?.selectHero?.length === 2 &&
-                        <Grid container justifyContent="center"
-                            alignItems="center"
-                            bgcolor={"white"}
-                            position={"absolute"}
-                            justifyItems={"center"}
-                            top={"50%"}
-                            left={"50%"}
-                            className="-translate-x-1/2 -translate-y-1/2 rounded-lg md:p-2  h-4/6  md:max-w-[45%]" >
-                            <Grid item xs={12}>
-                                <Typography textAlign={"center"} justifyContent={"center"} fontSize={"40px"} fontWeight={900} >Vencedor</Typography>
-                            </Grid>
-                            <Grid item xs={12} md={6} className="h-1/4 md:h-1/2 flex items-center justify-center">
-                                <img src={winner.images.md} className="h-[140px] w-[140px] rounded-full" alt="foto vencedor" />
-                            </Grid>
-                            <Grid item xs={12} md={6}>
-                                <Typography variant="body2" color="text.secondary" textAlign={"center"}>
-                                    Combat:{winner.powerstats.combat}
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary" textAlign={"center"}>
-                                    durability:{winner.powerstats.durability}
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary" textAlign={"center"}>
-                                    inteligence:{winner.powerstats.intelligence}
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary" textAlign={"center"}>
-                                    power:{winner.powerstats.power}
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary" textAlign={"center"}>
-                                    speed:{winner.powerstats.speed}
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary" textAlign={"center"}>
-                                    strength:{winner.powerstats.strength}
-                                </Typography>
-                            </Grid>
-                            <Grid item xs={12} display={"flex"} justifyContent={"center"} alignItems={"center"} fontSize={"34px"} >
-
-                                <Typography
-                                    color="text.primary"
-                                    textAlign={"center"}
-                                    className="text-9xl"
-                                    fontWeight={900}
-                                >
-                                    {`${winner.name} é o vencedor`}</Typography>
-                            </Grid>
-                        </Grid>
+                        <CardWinner winner={winner} />
                     }
                 </>
             </Modal>

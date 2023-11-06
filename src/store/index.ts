@@ -2,10 +2,7 @@ import { createSlice, configureStore} from '@reduxjs/toolkit'
 import { StateHero, ActionSearchHero, ActionSselectHero } from '../types'
 
 
-// Define a type for the slice state
 
-
-// Define the initial state using that type
 const initialState: StateHero = {
   searchHero: '',
   selectHero: [],
@@ -39,7 +36,7 @@ const counterSlice = createSlice({
         }
       }
     },
-    AddSelecHero: {
+    AddSelectHero: {
       reducer(state, action: ActionSselectHero) {
     
         if(state?.selectHero){
@@ -80,8 +77,6 @@ const counterSlice = createSlice({
       prepare(){
         return {
           payload: {
-           
-           
             
           }
         }
@@ -90,7 +85,7 @@ const counterSlice = createSlice({
   }
 })
 
-export const { updateSearch, AddSelecHero, deleteSelectHero } = counterSlice.actions
+export const { updateSearch, AddSelectHero, deleteSelectHero } = counterSlice.actions
 
 export const store = configureStore({
   reducer: counterSlice.reducer

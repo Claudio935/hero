@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Header from "./header";
 import useFetch from "../../hooks/useFetch";
 import { StateHero, Hero } from "../../types";
-import { AddSelecHero, deleteSelectHero } from "../../store";
+import { AddSelectHero, deleteSelectHero } from "../../store";
 import ModalCombat from "./modal";
 
 
@@ -19,7 +19,7 @@ const Home = () => {
         if (state.quantifySelectHero === 2) {
             dispatch(deleteSelectHero())
         }
-        dispatch(AddSelecHero([hero]))
+        dispatch(AddSelectHero([hero]))
 
     }
 
