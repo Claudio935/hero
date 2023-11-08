@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Stack, Grid } from "@mui/material";
+import { Typography, Stack, Grid, Card, CardActionArea, CardMedia, CardContent } from "@mui/material";
 import { Hero } from "../../../../types";
 
 type CardCombatProps = {
@@ -15,6 +15,29 @@ type CardCombatProps = {
 type WinnerProps = {
     winner: Hero,
 
+}
+type PropsCard = {
+    hero: Hero,
+    handleSelectCard: (hero: Hero) => void
+}
+export const HeroCard = ({ hero, handleSelectCard }: PropsCard) => {
+    return (
+        <Card className="hover:cursor-pointer hover:scale-110">
+            <CardActionArea onClick={() => handleSelectCard(hero)}>
+                <CardMedia
+                    component="img"
+                    height="154"
+                    image={hero.images.md}
+                    alt="Card image"
+                />
+                <CardContent>
+                    <Typography variant="body1" color="text.primary" fontWeight={700} textAlign={"center"}>
+                        {hero.name}
+                    </Typography>
+                </CardContent>
+            </ CardActionArea>
+        </Card>
+    )
 }
 export const CardCombat = ({ dataHero, combatColor,
     durabilityColor,
