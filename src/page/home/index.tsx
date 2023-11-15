@@ -23,6 +23,10 @@ const Home = () => {
 
 
     const handleSelectCard = (hero: Hero) => {
+        if (state.selectHero.find((heroTest) => heroTest.id === hero.id)) {
+            window.alert("Personagem já adicionado")
+            return
+        }
         if (state.quantifySelectHero === 2) {
             dispatch(deleteSelectHero())
         }
@@ -42,7 +46,6 @@ const Home = () => {
     if (!loading) {
         return (
             <Container maxWidth={"lg"} className=" p-10" >
-
                 <Grid container rowSpacing={4} columnSpacing={2}>
                     <Grid item xs={12}>
                         <Header></Header>

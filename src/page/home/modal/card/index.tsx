@@ -52,7 +52,7 @@ export const CardCombat = ({ dataHero, combatColor,
             <img
 
                 className="h-40 w-40 rounded-full"
-                src={dataHero.images.sm}
+                src={dataHero.images.md}
                 alt="Card image"
             />
             <Stack direction={"column"} spacing={1} >
@@ -129,54 +129,56 @@ export const CardWinner = ({ winner }: WinnerProps) => {
             <Grid item xs={12} md={6} className="h-1/4 md:h-1/2 flex items-center justify-center">
                 <img src={winner.images.md} className="h-[140px] w-[140px] rounded-full" alt="foto vencedor" />
             </Grid>
-            <Grid item xs={12} md={6}>
-                <Stack direction={"row"} width={"100%"}>
-                    <Typography variant="body2" color="text.secondary" textAlign={"center"}>
-                        Combat:
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" textAlign={"center"} fontWeight={700}>
-                        {winner.powerstats.combat}
-                    </Typography>
-                </Stack>
-                <Stack direction={"row"}>
-                    <Typography variant="body2" color="text.secondary" textAlign={"center"}>
-                        durability:
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" textAlign={"center"} fontWeight={700}>
-                        {winner.powerstats.durability}
-                    </Typography>
-                </Stack>
-                <Stack direction={"row"}>
-                    <Typography variant="body2" color="text.secondary" textAlign={"center"}>
-                        inteligence:
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" textAlign={"center"} fontWeight={700}>
-                        {winner.powerstats.intelligence}
-                    </Typography>
-                </Stack>
-                <Stack direction={"row"}>
-                    <Typography variant="body2" color="text.secondary" textAlign={"center"}>
-                        power:
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" textAlign={"center"} fontWeight={700}>
-                        {winner.powerstats.power}
-                    </Typography>
-                </Stack>
-                <Stack direction={"row"}>
-                    <Typography variant="body2" color="text.secondary" textAlign={"center"}>
-                        speed:
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" textAlign={"center"} fontWeight={700}>
-                        {winner.powerstats.speed}
-                    </Typography>
-                </Stack>
-                <Stack direction={"row"}>
-                    <Typography variant="body2" color="text.secondary" textAlign={"center"}>
-                        strength:
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" textAlign={"center"} fontWeight={700}>
-                        {winner.powerstats.strength}
-                    </Typography>
+            <Grid item xs={12} md={6} className="flex items-center justify-center" >
+                <Stack direction={"column"} className="flex items-center justify-end">
+                    <Stack direction={"row"}  >
+                        <Typography variant="body2" color="text.secondary" textAlign={"center"}>
+                            Combat:
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary" textAlign={"center"} fontWeight={700}>
+                            {winner.powerstats.combat}
+                        </Typography>
+                    </Stack>
+                    <Stack direction={"row"} >
+                        <Typography variant="body2" color="text.secondary" textAlign={"center"}>
+                            durability:
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary" textAlign={"center"} fontWeight={700}>
+                            {winner.powerstats.durability}
+                        </Typography>
+                    </Stack>
+                    <Stack direction={"row"} >
+                        <Typography variant="body2" color="text.secondary" textAlign={"center"}>
+                            inteligence:
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary" textAlign={"center"} fontWeight={700}>
+                            {winner.powerstats.intelligence}
+                        </Typography>
+                    </Stack>
+                    <Stack direction={"row"} >
+                        <Typography variant="body2" color="text.secondary" textAlign={"center"}>
+                            power:
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary" textAlign={"center"} fontWeight={700}>
+                            {winner.powerstats.power}
+                        </Typography>
+                    </Stack>
+                    <Stack direction={"row"} >
+                        <Typography variant="body2" color="text.secondary" textAlign={"center"}>
+                            speed:
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary" textAlign={"center"} fontWeight={700}>
+                            {winner.powerstats.speed}
+                        </Typography>
+                    </Stack>
+                    <Stack direction={"row"} >
+                        <Typography variant="body2" color="text.secondary" textAlign={"center"}>
+                            strength:
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary" textAlign={"center"} fontWeight={700}>
+                            {winner.powerstats.strength}
+                        </Typography>
+                    </Stack>
                 </Stack>
             </Grid>
             <Grid item xs={12} display={"flex"} justifyContent={"center"} alignItems={"center"} fontSize={"34px"} >
