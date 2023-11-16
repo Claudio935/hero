@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Grid, Typography, Box, CircularProgress, Pagination } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import Header from "./header";
 import useFetch from "../../hooks/useFetch";
 import { StateHero, Hero } from "../../types";
@@ -13,21 +13,26 @@ import { HeroCard } from "./modal/card";
 
 
 
+
 const Home = () => {
 
-    const state = useSelector((state: StateHero) => state)
+
+    const { selectHero, quantifySelectHero, searchHero } = useSelector((state: StateHero) => ({ selectHero: state.selectHero, quantifySelectHero: state.quantifySelectHero, searchHero: state.searchHero }), shallowEqual)
+
     const dispatch = useDispatch()
 
     const { data, loading, error } = useFetch("http://homologacao3.azapfy.com.br/api/ps/metahumans")
-    const { currentData, currentPage, maxPage, jump } = usePagination(data.filter((item) => item.name.includes(state.searchHero)), 12)
+
+
+    const { currentData, currentPage, maxPage, jump } = usePagination(data.filter((item) => item.name.includes(searchHero)), 12)
 
 
     const handleSelectCard = (hero: Hero) => {
-        if (state.selectHero.find((heroTest) => heroTest.id === hero.id)) {
+        if (selectHero.find((heroTest) => heroTest.id === hero.id)) {
             window.alert("Personagem já adicionado")
             return
         }
-        if (state.quantifySelectHero === 2) {
+        if (quantifySelectHero === 2) {
             dispatch(deleteSelectHero())
         }
         dispatch(AddSelectHero([hero]))
@@ -49,7 +54,6 @@ const Home = () => {
                 <Grid container rowSpacing={4} columnSpacing={2}>
                     <Grid item xs={12}>
                         <Header></Header>
-
                     </Grid>
                     {currentData()?.map((hero) => {
                         return (
